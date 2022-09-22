@@ -1,0 +1,5 @@
+.vscode/
+application.properties
+target/
+logs/
+tomcat.5000
