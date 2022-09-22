@@ -7,11 +7,11 @@ import java.util.Objects;
 public class UserResponse implements Serializable{
 
     private String user_id;
-    private String username;
-    private String email;
-    //! private String password;
     private String given_name;
     private String surname;
+    private String email;
+    private String username;
+    //! private String password;
     private boolean is_active;
     private String role;
 
