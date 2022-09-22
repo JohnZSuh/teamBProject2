@@ -1,96 +1,114 @@
 package com.project.user;
 
 import java.util.Objects;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 //* POJO = Plain Ol' Java Object
+@Entity
+@Table(name = "ers_users")
 public class User {
+    @Id // indicates a primary key
+    @Column(name = "user_id") // all fields in an entity implicitly have @Column
+    private UUID id;
 
-    private String user_id;
-    private String username;
-    private String email;
-    private String password;
-    private String given_name;
+    @Column(name = "given_name", nullable = false)
+    private String givenName;
+
+    @Column(nullable = false) // column name defaults to field name if not provided
     private String surname;
-    private boolean is_active;
-    private String role;
 
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    // JPA REQUIRES A NO-ARG CONSTRUCTOR FOR ALL ENTITIES
     public User() {
         super();
     }
 
-    public User(String user_id, String username, String email, String password, String given_name, String surname,
-            boolean is_active) {
-        this.user_id = user_id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.given_name = given_name;
+    public User(UUID id, String givenName, String surname, String email, String username, String password, Role role) {
+        this.id = id;
+        this.givenName = givenName;
         this.surname = surname;
-        this.is_active = is_active;
-    }
-
-    public void setUser_id (String user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUsername (String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setEmail (String email) {
         this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setPassword (String password) {
+        this.username = username;
         this.password = password;
+        this.role = role;
     }
 
-    public String getPassword() {
-        return password;
+    public UUID getId() {
+        return id;
     }
 
-    public void setGiven_name (String given_name) {
-        this.given_name = given_name;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public String getGiven_name() {
-        return given_name;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public void setSurname (String surname) {
-        this.surname = surname;
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setIs_active (boolean is_active) {
-        this.is_active =is_active;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public boolean getIs_active() {
-        return is_active;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRole (String role) {
-        this.role = role;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getRole() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
         return role;
+    }
+
+    public void setRole (Role role) {
+        this.role = role;
     }
 
     @Override
@@ -98,30 +116,28 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(user_id, user.user_id)
-            && Objects.equals(username, user.username) && Objects.equals(email, user.email) 
-            && Objects.equals(password, user.password) && Objects.equals(given_name, user.given_name)
-            && Objects.equals(surname, user.surname) && Objects.equals(is_active, user.is_active) 
+        return Objects.equals(id, user.id) && Objects.equals(givenName, user.givenName)
+            && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) 
+            && Objects.equals(username, user.username) && Objects.equals(password, user.password) 
             && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, email, password, given_name, surname, is_active, role);
+        return Objects.hash(id, givenName, surname, email, username, password, role);
     }
 
     @Override
     public String toString() {
-        return  "User " + "{" +
-                "user_id = '" + user_id +  "' " +
-                "username = '" + username + "' " +
-                "email = '" + email + "' " +
-                "password = '" + password + "' " +
-                "given_name = '" + given_name + "' " +
-                "surname = '" + surname + "' " +
-                "is_active = '" + is_active + "' " +
-                "role = '" + role + "' " +
-                "'}";
+        return "User{" +
+                "id='" + id + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 }
 

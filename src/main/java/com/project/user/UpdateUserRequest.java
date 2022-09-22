@@ -94,10 +94,10 @@ public class UpdateUserRequest implements Request<User> {
         User extractedEntity = new User();
         extractedEntity.setUsername(this.username);
         extractedEntity.setEmail(this.email);
-        extractedEntity.setGiven_name(this.given_name);
+        extractedEntity.setGivenName(this.given_name);
         extractedEntity.setSurname(this.surname);
-        extractedEntity.setIs_active(this.is_active);
-        extractedEntity.setRole(role);
+        // extractedEntity.setIs_active(this.is_active);
+        // extractedEntity.setRole(role);
         return extractedEntity;
     }
 }

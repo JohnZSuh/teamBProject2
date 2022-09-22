@@ -3,11 +3,6 @@ package com.project.common.datasource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +12,8 @@ import com.project.common.exceptions.DataSourceException;
 @Component
 public class ConnectionFactory {
 
-    private static Logger logger = LogManager.getLogger(ConnectionFactory.class);
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    // private static Logger logger = LogManager.getLogger(ConnectionFactory.class);
+    // DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     
     @Value("${db-url}")
     private String dbUrl;
@@ -36,7 +31,6 @@ public class ConnectionFactory {
         }
         catch (ClassNotFoundException e) {
             String message = "Failed to load PostgreSQL JDbc driver";
-            logger.fatal(message + " at {}", LocalDateTime.now().format(format));
             throw new DataSourceException(message, e);
         }
     }
