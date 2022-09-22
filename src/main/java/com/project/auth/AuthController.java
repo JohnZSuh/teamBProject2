@@ -1,6 +1,5 @@
 package com.project.auth;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,18 +10,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.project.common.ErrorResponse;
-import com.project.common.exceptions.AuthenticationException;
-import com.project.common.exceptions.DataSourceException;
-import com.project.common.exceptions.InvalidRequestException;
 import com.project.user.UserResponse;
 
 
@@ -58,27 +51,4 @@ public class AuthController {
         req.getSession().invalidate();
     }
 
-    @ExceptionHandler({InvalidRequestException.class, JsonMappingException.class})
-    public ErrorResponse handleBadRequest(Exception e) {
-        logger.warn("A bad request was recieved at {}, details: {}", LocalDateTime.now().format(format), e.getMessage());
-        return new ErrorResponse(400, e.getMessage());
-    }
-
-    @ExceptionHandler
-    public ErrorResponse handleAuthenticationExceptions(AuthenticationException e) {
-        logger.warn("A failed authentication occured at {}, details: {}", LocalDateTime.now().format(format), e.getMessage());
-        return new ErrorResponse(401, e.getMessage());
-    }
-
-    @ExceptionHandler
-    public ErrorResponse handleDataSourceExceptions(DataSourceException e) {
-        logger.warn("A datasource exception was thrown at {}, details: {}", LocalDateTime.now().format(format), e.getMessage());
-        return new ErrorResponse(500, e.getMessage());
-    }
-
-    @ExceptionHandler
-    public ErrorResponse handleOtherExceptions(Exception e) {
-        logger.warn("A failed authentication occured at {}, details: {}", LocalDateTime.now().format(format), e.getMessage());
-        return new ErrorResponse(500, e.getMessage());
-    }
 }
