@@ -1,46 +1,48 @@
 package com.Nick.common.datasource;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.Nick.common.exceptions.DataSourceException;
 
 // Implement ConnectionFactory and singleton
+@Component
 public class ConnectionFactory {
 
     private static Logger logger = LogManager.getLogger(ConnectionFactory.class);
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
-    private static ConnectionFactory connFactory;
-    private Properties dbProps = new Properties();
     
+    @Value("${db-url}")
+    private String dbUrl;
+
+    @Value("${db-username}")
+    private String dbUsername;
+    
+    @Value("${db-password}")
+    private String dbPassword;
 
     public ConnectionFactory() {
 
         try {
-            dbProps.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
+            Class.forName("org.postgresql.Driver");
         }
-        catch (IOException e) {
-            logger.fatal("There was a problem reading from the properties file at {}", LocalDateTime.now().format(format));
-            throw new RuntimeException("Could not read from .properties file.", e);
+        catch (ClassNotFoundException e) {
+            String message = "Failed to load PostgreSQL JDbc driver";
+            logger.fatal(message + " at {}", LocalDateTime.now().format(format));
+            throw new DataSourceException(message, e);
         }
-    }
-
-    public static ConnectionFactory getInstance() {
-        if (connFactory == null) {
-            connFactory = new ConnectionFactory();
-        }
-        return connFactory;
     }
     
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(dbProps.getProperty("db_url"), dbProps.getProperty("db_username"), dbProps.getProperty("db_password"));
+        return DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
     }
 }
 
