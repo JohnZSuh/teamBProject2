@@ -1,4 +1,4 @@
-package com.Nick.auth;
+package com.project.auth;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Nick.common.ErrorResponse;
-import com.Nick.common.exceptions.AuthenticationException;
-import com.Nick.common.exceptions.DataSourceException;
-import com.Nick.common.exceptions.InvalidRequestException;
-import com.Nick.user.UserResponse;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.project.common.ErrorResponse;
+import com.project.common.exceptions.AuthenticationException;
+import com.project.common.exceptions.DataSourceException;
+import com.project.common.exceptions.InvalidRequestException;
+import com.project.user.UserResponse;
 
 
 @RestController
