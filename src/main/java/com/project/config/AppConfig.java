@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.Nick")
+@ComponentScan("com.project")
 @PropertySource("classpath:application.properties")
 public class AppConfig {
 
