@@ -1,4 +1,4 @@
-package com.Nick.common.exceptions;
+package com.project.common.exceptions;
 
 public class DataSourceException extends RuntimeException{
 

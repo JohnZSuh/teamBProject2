@@ -1,4 +1,4 @@
-package com.Nick.user;
+package com.project.user;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,9 +13,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.Nick.common.datasource.ConnectionFactory;
-import com.Nick.common.exceptions.DataSourceException;
-import com.Nick.common.exceptions.ResourceNotFoundException;
+import com.project.common.datasource.ConnectionFactory;
+import com.project.common.exceptions.DataSourceException;
+import com.project.common.exceptions.ResourceNotFoundException;
 
 
 //* DAO = Data Access Object

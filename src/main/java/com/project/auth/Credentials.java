@@ -1,4 +1,4 @@
-package com.Nick.auth;
+package com.project.auth;
 
 // request DTO
 public class Credentials {

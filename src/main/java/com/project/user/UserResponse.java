@@ -1,4 +1,4 @@
-package com.Nick.user;
+package com.project.user;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.Nick.auth;
+package com.project.auth;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Nick.common.exceptions.AuthenticationException;
-import com.Nick.common.exceptions.InvalidRequestException;
-import com.Nick.user.UserDAO;
-import com.Nick.user.UserResponse;
+import com.project.common.exceptions.AuthenticationException;
+import com.project.common.exceptions.InvalidRequestException;
+import com.project.user.UserDAO;
+import com.project.user.UserResponse;
 
 
 @Service

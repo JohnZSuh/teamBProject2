@@ -1,4 +1,4 @@
-package com.github.Nick.common.exceptions;
+package com.project.common.exceptions;
 
 public class ResourcePersistenceException extends RuntimeException{
 

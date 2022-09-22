@@ -1,4 +1,4 @@
-package com.Nick.user;
+package com.project.user;
 
 import java.util.Objects;
 

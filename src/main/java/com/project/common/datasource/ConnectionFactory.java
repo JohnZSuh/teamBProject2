@@ -1,4 +1,4 @@
-package com.Nick.common.datasource;
+package com.project.common.datasource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.Nick.common.exceptions.DataSourceException;
+import com.project.common.exceptions.DataSourceException;
 
 // Implement ConnectionFactory and singleton
 @Component

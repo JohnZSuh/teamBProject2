@@ -1,4 +1,4 @@
-package com.Nick.common;
+package com.project.common;
 
 public interface Request<T> {
 

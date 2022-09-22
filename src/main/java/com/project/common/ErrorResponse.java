@@ -1,4 +1,4 @@
-package com.Nick.common;
+package com.project.common;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

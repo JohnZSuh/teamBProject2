@@ -1,6 +1,6 @@
-package com.Nick.user;
+package com.project.user;
 
-import com.Nick.common.Request;
+import com.project.common.Request;
 
 public class UpdateUserRequest implements Request<User> {
 
