@@ -1,10 +1,12 @@
 package com.project.reimbursement;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,14 +20,15 @@ public class Reimbursement {
     @Column(name = "reimb_id", nullable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @GeneratedValue
+    @Column(columnDefinition = "NUMERIC(6,2)", nullable = false)
     private double amount;
 
     @Column(nullable = false)
-    private String submitted;
+    private LocalDateTime submitted;
 
     @Column
-    private String resolved;
+    private LocalDateTime resolved;
 
     @Column(nullable = false)
     private String description;
@@ -48,7 +51,7 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(UUID id, double amount, String submitted, String resolved,
+    public Reimbursement(UUID id, double amount, LocalDateTime submitted, LocalDateTime resolved,
              String description, UUID authorId, UUID resolverId, Status statusId, Type typeId) {
         this.id = id;
         this.amount = amount;
@@ -77,19 +80,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public String getSubmitted() {
+    public LocalDateTime getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(String submitted) {
+    public void setSubmitted(LocalDateTime submitted) {
         this.submitted = submitted;
     }
 
-    public String getResolved() {
+    public LocalDateTime getResolved() {
         return resolved;
     }
 
-    public void setResolved(String resolved) {
+    public void setResolved(LocalDateTime resolved) {
         this.resolved = resolved;
     }
 
