@@ -38,18 +38,18 @@ public class Reimbursement {
     
     @ManyToOne
     @JoinColumn(name = "status_id", nullable = false)
-    private UUID statusId;
+    private Status statusId;
     
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
-    private UUID typeId;
+    private Type typeId;
     
     public Reimbursement() {
         super();
     }
 
     public Reimbursement(UUID id, double amount, String submitted, String resolved,
-             String description, UUID authorId, UUID resolverId, UUID statusId, UUID typeId) {
+             String description, UUID authorId, UUID resolverId, Status statusId, Type typeId) {
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
@@ -117,19 +117,19 @@ public class Reimbursement {
         this.resolverId = resolverId;
     }
 
-    public UUID getStatusId() {
+    public Status getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(UUID statusId) {
+    public void setStatusId(Status statusId) {
         this.statusId = statusId;
     }
 
-    public UUID getTypeId() {
+    public Type getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(UUID typeId) {
+    public void setTypeId(Type typeId) {
         this.typeId = typeId;
     }
 
@@ -160,9 +160,9 @@ public class Reimbursement {
                "resolved = '" + resolved + "', " +
                "resolverId = '" + resolverId + "', " +
                "statusId = '" + statusId + "', " +
-                "submitted = '" + submitted + ", " + 
-                "typeId = '" + typeId + "' " +
-                "]";
+               "submitted = '" + submitted + ", " + 
+               "typeId = '" + typeId + "' " +
+               "]";
     }
 
     

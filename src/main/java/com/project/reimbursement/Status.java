@@ -19,6 +19,15 @@ public class Status {
     @Column
     private String status;
 
+    public Status() {
+        super();
+    }
+
+    public Status (UUID statusId, String status) {
+        this.statusId = statusId;
+        this.status = status;
+    }
+
     public UUID getStatusId() {
         return statusId;
     }
