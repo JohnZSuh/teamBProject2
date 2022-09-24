@@ -72,6 +72,8 @@ public class NewUserRequest implements Request<User> {
         extractedEntity.setEmail(this.email);
         extractedEntity.setUsername(this.username);
         extractedEntity.setPassword(this.password);
+        
+        //TODO Change this to ers user role uuid value
         extractedEntity.setRole(new Role(UUID.fromString("5a2e0415-ee08-440f-ab8a-778b37ff6874"), "JUNIOR"));
         return extractedEntity;
     }
