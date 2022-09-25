@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReimbRepository extends JpaRepository<Reimbursement, UUID> {
 
-    
+    // save to database
+    String save(NewRequest newRequest);
 }
