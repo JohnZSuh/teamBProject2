@@ -3,12 +3,12 @@ package com.project.auth;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.project.common.exceptions.AuthenticationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.common.exceptions.AuthenticationException;
 import com.project.common.exceptions.InvalidRequestException;
 import com.project.user.UserRepository;
 import com.project.user.UserResponse;
@@ -51,8 +51,9 @@ public class AuthService {
             
         UserResponse user = userRepository.findUserByUsernameAndPassword(credentials.getUsername(), credentials.getPassword())
                 .map(UserResponse :: new).orElseThrow(AuthenticationException::new);
-                
+
         return user;
+
         // logger.info("Checking if user is active at {}", LocalDateTime.now().format(format));
         // if(active == true) {
         //     return user;
