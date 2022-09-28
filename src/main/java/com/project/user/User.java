@@ -45,13 +45,14 @@ public class User {
         super();
     }
 
-    public User(UUID id, String givenName, String surname, String email, String username, String password, Role role) {
+    public User(UUID id, String givenName, String surname, String email, String username, String password, Boolean isActive, Role role) {
         this.id = id;
         this.givenName = givenName;
         this.surname = surname;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.isActive = isActive;
         this.role = role;
     }
 
@@ -103,6 +104,14 @@ public class User {
         this.password = password;
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -119,12 +128,12 @@ public class User {
         return Objects.equals(id, user.id) && Objects.equals(givenName, user.givenName)
             && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) 
             && Objects.equals(username, user.username) && Objects.equals(password, user.password) 
-            && Objects.equals(role, user.role);
+            && Objects.equals(isActive, user.isActive) && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, givenName, surname, email, username, password, role);
+        return Objects.hash(id, givenName, surname, email, username, password, isActive, role);
     }
 
     @Override

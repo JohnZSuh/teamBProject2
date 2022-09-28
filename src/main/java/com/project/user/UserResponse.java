@@ -11,6 +11,7 @@ public class UserResponse implements Serializable {
     private String surname;
     private String email;
     private String username;
+    private boolean isActive;
     private String role;
 
     public UserResponse(User subject) {
@@ -19,6 +20,7 @@ public class UserResponse implements Serializable {
         this.surname = subject.getSurname();
         this.email = subject.getEmail();
         this.username = subject.getUsername();
+        this.isActive = subject.getIsActive();
         this.role = subject.getRole().getName();
     }
 
@@ -62,6 +64,14 @@ public class UserResponse implements Serializable {
         this.username = username;
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public String getRole() {
         return role;
     }
@@ -75,12 +85,14 @@ public class UserResponse implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserResponse that = (UserResponse) o;
-        return Objects.equals(id, that.id) && Objects.equals(givenName, that.givenName) && Objects.equals(surname, that.surname) && Objects.equals(email, that.email) && Objects.equals(username, that.username) && Objects.equals(role, that.role);
+        return Objects.equals(id, that.id) && Objects.equals(givenName, that.givenName) && Objects.equals(surname, that.surname) 
+            && Objects.equals(email, that.email) && Objects.equals(username, that.username) 
+            && Objects.equals(isActive, that.isActive) && Objects.equals(role, that.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, givenName, surname, email, username, role);
+        return Objects.hash(id, givenName, surname, email, username, isActive, role);
     }
 
     @Override
@@ -91,6 +103,7 @@ public class UserResponse implements Serializable {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
+                ", isActive='" + isActive + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

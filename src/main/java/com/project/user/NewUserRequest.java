@@ -11,6 +11,8 @@ public class NewUserRequest implements Request<User> {
     private String email;
     private String username;
     private String password;
+    private boolean isActive;
+    private String role;
 
     public String getGivenName() {
         return givenName;
@@ -51,6 +53,22 @@ public class NewUserRequest implements Request<User> {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -72,9 +90,10 @@ public class NewUserRequest implements Request<User> {
         extractedEntity.setEmail(this.email);
         extractedEntity.setUsername(this.username);
         extractedEntity.setPassword(this.password);
-        
+        extractedEntity.setIsActive(this.isActive);
+
         //TODO Change this to ers user role uuid value
-        extractedEntity.setRole(new Role(UUID.fromString("5a2e0415-ee08-440f-ab8a-778b37ff6874"), "JUNIOR"));
+        // extractedEntity.setRole(new Role(UUID.fromString("5a2e0415-ee08-440f-ab8a-778b37ff6874"), "JUNIOR"));
         return extractedEntity;
     }
 

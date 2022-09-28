@@ -72,6 +72,33 @@ public class UserService {
         }
 
         User userToPersist = newUser.extractEntity();
+
+        if(newUser.getRole() != null) {
+            if (newUser.getRole().toUpperCase().equals("ADMIN")) {
+                Role role = new Role();
+                role.setId(UUID.fromString("UUID for Adim")); // TODO add uuid for Admin 8-4-4-4-12
+                role.setName("Admin");
+                userToPersist.setRole(role);
+            } else if (newUser.getRole().toUpperCase().equals("FINANCE MANAGER")) {
+                Role role = new Role();
+                role.setId(UUID.fromString("UUID for Finance Manger")); // TODO add uuid for Finance Manager 8-4-4-4-12
+                role.setName("Finance Manager");
+                userToPersist.setRole(role);
+            } else if (newUser.getRole().toUpperCase().equals("EMPLOYEE")) {
+                Role role = new Role();
+                role.setId(UUID.fromString("UUID for Employee")); // TODO add Employee uuid 8-4-4-4-12
+                role.setName("Employee");
+                userToPersist.setRole(role);
+            }else { // If given role does not match
+                throw new InvalidRequestException("Role not supported. Enter 'Admin', 'Finance Manger' or 'Employee'.");
+            }
+        } else { // Default to employee if no given role
+            Role role = new Role();
+            role.setId(UUID.fromString("UUID for Employee")); // TODO add Employee uuid 8-4-4-4-12
+            role.setName("Employee");
+            userToPersist.setRole(role);
+        }
+
         userRepo.save(userToPersist);
         return new ResourceCreationResponse(userToPersist.getId().toString());
 
