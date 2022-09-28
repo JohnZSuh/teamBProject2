@@ -22,7 +22,7 @@ public class SecurityUtils {
     }
 
     public static void enforcePermissions(HttpSession userSession, String expectedRole) {
-        if (!((UserResponse) userSession.getAttribute("authUser")).getRole().equals(expectedRole)) {
+        if (!((UserResponse) userSession.getAttribute("authUser")).getRole().toUpperCase().equals(expectedRole.toUpperCase())) {
             throw new AuthorizationException();
         }
     }
