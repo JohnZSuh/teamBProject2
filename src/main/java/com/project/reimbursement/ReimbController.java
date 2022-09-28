@@ -45,8 +45,9 @@ public class ReimbController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ReimbResponse getReimbById(@PathVariable String id, HttpSession userSession) {
+    public ReimbResponse getReimbById(@PathVariable String id, HttpServletRequest req) {
         logger.info("A GET request was received by /reimb/{id} at {}", LocalDateTime.now());
+        HttpSession userSession = req.getSession(false);
         enforceAuthentication(userSession);
         enforcePermissions(userSession, "FINANCE_MANAGER");
         return reimbService.getReimbById(id);
@@ -55,23 +56,24 @@ public class ReimbController {
 
     // Create new request.
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResourceCreationResponse newRequest(@RequestBody NewRequest newRequest, HttpSession userSession) {
+    public ResourceCreationResponse newRequest(@RequestBody NewRequest newRequest, HttpServletRequest req) {
+        HttpSession userSession = req. getSession(false);
 
         enforceAuthentication(userSession);
 
         UserResponse requester = (UserResponse) userSession.getAttribute("authUser");
-        requester.getId();
 
         return reimbService.createNewRequest(newRequest, UUID.fromString(requester.getId()));
     }
 
     @PostMapping(value="/manager")
-    public void postMethodName(@RequestBody UpdateReimbRequest updateReimbStatus, HttpSession httpSession) {
+    public void postMethodName(@RequestBody UpdateReimbRequest updateReimbStatus, HttpServletRequest req) {
+        HttpSession userSession = req.getSession(false);
         
-        enforceAuthentication(httpSession);
-        // enforcePermissions(httpSession, "Finance Manager"); // TODO check
+        enforceAuthentication(userSession);
+        enforcePermissions(userSession, "Finance Manager");
 
-        UserResponse requester = (UserResponse) httpSession.getAttribute("authUser");
+        UserResponse requester = (UserResponse) userSession.getAttribute("authUser");
 
         reimbService.updateStatus(updateReimbStatus, UUID.fromString(requester.getId()));
 

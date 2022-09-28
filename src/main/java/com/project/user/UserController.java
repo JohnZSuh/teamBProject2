@@ -21,6 +21,7 @@ import com.project.common.ResourceCreationResponse;
 import static com.project.common.SecurityUtils.*;
 
 
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -44,17 +45,21 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public UserResponse getUserById(@PathVariable String id, HttpSession userSession) {
+    public UserResponse getUserById(@PathVariable String id, HttpServletRequest req) {
         logger.info("A GET request was received by /users/{id} at {}", LocalDateTime.now());
+        HttpSession userSession = req.getSession(false);
         enforceAuthentication(userSession);
         enforcePermissions(userSession, "ADMIN");
         return userService.getUserById(id);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResourceCreationResponse registerNewUser(@RequestBody NewUserRequest requestBody) {
+    public ResourceCreationResponse registerNewUser(@RequestBody NewUserRequest requestBody, HttpServletRequest req) {
         logger.info("A POST request was received by /users at {}", LocalDateTime.now());
+        HttpSession userSession = req.getSession(false);
+        enforceAuthentication(userSession);
+        enforcePermissions(userSession, "Admin");
         return userService.register(requestBody);
-    }
+    }    
 
 }

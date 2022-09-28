@@ -49,14 +49,14 @@ public class ErrorResponseAspect {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleResourceNotFoundExceptions(ResourceNotFoundException e) {
-        logger.warn("An unauthorized request occurred at {}, details: {}", LocalDateTime.now(), e.getMessage());
+        logger.warn("A ResourceNotFoundException occurred at {}, details: {}", LocalDateTime.now(), e.getMessage());
         return new ErrorResponse(403, e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleResourcePersistenceExceptions(ResourcePersistenceException e) {
-        logger.warn("An unauthorized request occurred at {}, details: {}", LocalDateTime.now(), e.getMessage());
+        logger.warn("A ResourcePersistenceException occurred at {}, details: {}", LocalDateTime.now(), e.getMessage());
         return new ErrorResponse(403, e.getMessage());
     }
 
