@@ -13,10 +13,10 @@ import javax.persistence.Table;
 public class Status {
 
     @Id
-    @Column(name = "status_id")
+    @Column(name = "status_id", nullable = false)
     private UUID statusId;
     
-    @Column
+    @Column(nullable = false)
     private String status;
 
     public Status() {

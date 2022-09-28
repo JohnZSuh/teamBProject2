@@ -64,5 +64,17 @@ public class ReimbController {
 
         return reimbService.createNewRequest(newRequest, UUID.fromString(requester.getId()));
     }
+
+    @PostMapping(value="/manager")
+    public void postMethodName(@RequestBody UpdateReimbRequest updateReimbStatus, HttpSession httpSession) {
+        
+        enforceAuthentication(httpSession);
+        // enforcePermissions(httpSession, "Finance Manager"); // TODO check
+
+        UserResponse requester = (UserResponse) httpSession.getAttribute("authUser");
+
+        reimbService.updateStatus(updateReimbStatus, UUID.fromString(requester.getId()));
+
+    }
     
 }

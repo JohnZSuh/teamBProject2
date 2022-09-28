@@ -18,7 +18,7 @@ public class Reimbursement {
 
     @Id
     @Column(name = "reimb_id", nullable = false)
-    private UUID id;
+    private UUID reimbId;
 
     @GeneratedValue
     @Column(columnDefinition = "NUMERIC(6,2)", nullable = false)
@@ -51,9 +51,9 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(UUID id, double amount, LocalDateTime submitted, LocalDateTime resolved,
+    public Reimbursement(UUID reimbId, double amount, LocalDateTime submitted, LocalDateTime resolved,
              String description, UUID authorId, UUID resolverId, Status statusId, Type typeId) {
-        this.id = id;
+        this.reimbId = reimbId;
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
@@ -65,11 +65,11 @@ public class Reimbursement {
     }
 
     public UUID getId() {
-        return id;
+        return reimbId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setId(UUID reimbId) {
+        this.reimbId = reimbId;
     }
 
     public double getAmount() {
@@ -141,7 +141,7 @@ public class Reimbursement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reimbursement reimbursement = (Reimbursement) o;
-        return Objects.equals(id, reimbursement.id) && Objects.equals(amount, reimbursement.amount)
+        return Objects.equals(reimbId, reimbursement.reimbId) && Objects.equals(amount, reimbursement.amount)
             && Objects.equals(submitted, reimbursement.submitted) && Objects.equals(resolved, reimbursement.resolved) 
             && Objects.equals(description, reimbursement.description) && Objects.equals(authorId, reimbursement.authorId) 
             && Objects.equals(resolverId, reimbursement.resolverId) && Objects.equals(statusId, reimbursement.statusId)
@@ -150,7 +150,7 @@ public class Reimbursement {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, submitted, resolved, description, authorId, resolverId, statusId, typeId);
+        return Objects.hash(reimbId, amount, submitted, resolved, description, authorId, resolverId, statusId, typeId);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class Reimbursement {
                "amount = '" + amount + "', " +
                "authorId = '" + authorId + "', " +
                "description = '" + description + "', " +
-               "id = '" + id + "', " + 
+               "id = '" + reimbId + "', " + 
                "resolved = '" + resolved + "', " +
                "resolverId = '" + resolverId + "', " +
                "statusId = '" + statusId + "', " +
